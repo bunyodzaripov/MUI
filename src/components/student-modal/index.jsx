@@ -24,8 +24,15 @@ const style = {
    p: 4,
 };
 
-export default function BasicModal({ open, handleClose, group, teacher }) {
+export default function BasicModal({
+   open,
+   handleClose,
+   group,
+   teacher,
+   data,
+}) {
    const [from, setFrom] = useState({});
+   console.log(29, data);
 
    const handleChange = (event) => {
       const { name, value } = event.target;

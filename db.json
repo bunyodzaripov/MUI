@@ -1,53 +1,13 @@
 {
   "students": [
     {
-      "id": "12",
-      "name": "Jimmiie",
-      "age": 20,
-      "phone": 123456789,
-      "address": "New York",
-      "group": "React JS Bootcamp N11",
-      "teacher": "John Doe"
-    },
-    {
-      "id": "0708",
-      "group": "React JS Bootcamp N11",
-      "name": "1212",
-      "age": "2121",
-      "phone": "12",
-      "address": "12"
-    },
-    {
-      "id": "b4ff",
-      "group": "React JS Bootcamp N11",
-      "name": "12",
-      "age": "21",
+      "id": "be1e",
+      "group": "Angular JS Standart N13",
+      "name": "admin",
       "phone": "21",
-      "address": "21"
-    },
-    {
-      "id": "cc4b",
-      "group": "React JS Bootcamp N11",
-      "name": "12",
-      "age": "21",
-      "phone": "21",
-      "address": "12"
-    },
-    {
-      "id": "118e",
-      "group": "NT-1",
-      "name": "Bunyod",
-      "age": "22",
-      "phone": "1929291",
-      "address": "chilonzor"
-    },
-    {
-      "id": "e7e9",
-      "group": "React JS Bootcamp N11",
-      "teacher": "user",
       "age": "12",
-      "phone": "21",
-      "address": "21"
+      "address": "21",
+      "teacher": "user"
     }
   ],
   "teacher": [
