@@ -1,0 +1,64 @@
+{
+  "students": [
+    {
+      "id": "12",
+      "name": "Jimmiie",
+      "age": 20,
+      "phone": 123456789,
+      "address": "New York",
+      "group": "React JS Bootcamp N11",
+      "teacher": "John Doe"
+    }
+  ],
+  "teacher": [
+    {
+      "id": "133",
+      "name": "John Doe",
+      "course": "Frontend"
+    },
+    {
+      "id": "2e4e"
+    },
+    {
+      "id": "6c63"
+    },
+    {
+      "id": "8395"
+    },
+    {
+      "id": "b013"
+    },
+    {
+      "id": "96ee"
+    },
+    {
+      "id": "53a1"
+    },
+    {
+      "id": "00e1"
+    },
+    {
+      "id": "ca81"
+    },
+    {
+      "id": "df79"
+    },
+    {
+      "id": "aa8c"
+    }
+  ],
+  "groups": [
+    {
+      "id": "11223",
+      "name": "React JS Bootcamp N11"
+    }
+  ],
+  "courses": [
+    {
+      "id": "1234",
+      "name": "Frontend",
+      "duration": "8 months",
+      "price": "$1000"
+    }
+  ]
+}
