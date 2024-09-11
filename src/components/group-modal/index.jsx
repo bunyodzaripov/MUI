@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
    FormControl,
    InputLabel,
@@ -24,8 +24,20 @@ const style = {
    p: 4,
 };
 
-export default function BasicModal({ open, handleClose, course }) {
-   const [from, setFrom] = useState({});
+export default function BasicModal({ open, handleClose, course, update }) {
+   const [from, setFrom] = useState({
+      name: "",
+      course: "",
+   });
+
+   useEffect(() => {
+      if (update) {
+         setFrom({
+            name: update.name || "",
+            course: update.course || "",
+         });
+      }
+   }, [update]);
 
    const handleChange = (event) => {
       const { name, value } = event.target;
@@ -34,13 +46,17 @@ export default function BasicModal({ open, handleClose, course }) {
 
    const handleSubmit = async () => {
       try {
-         const res = await axios.post("http://localhost:3000/groups", from);
-         handleClose();
+         if (update?.id) {
+            await axios.put(`http://localhost:3000/groups/${update.id}`, from);
+            handleClose();
+         } else {
+            await axios.post("http://localhost:3000/groups", from);
+            handleClose();
+         }
       } catch (error) {
          console.log(error);
       }
    };
-
    return (
       <div>
          <Modal
@@ -57,6 +73,7 @@ export default function BasicModal({ open, handleClose, course }) {
                      id="demo-simple-select"
                      name="course"
                      label="Course"
+                     value={from?.course}
                      onChange={handleChange}
                   >
                      {course?.map((item, index) => {
@@ -72,6 +89,7 @@ export default function BasicModal({ open, handleClose, course }) {
                      label="Group Name"
                      id="fullWidth"
                      name="name"
+                     value={from?.name}
                      onChange={handleChange}
                   />
                   <Button

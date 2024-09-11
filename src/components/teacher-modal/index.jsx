@@ -24,8 +24,20 @@ const style = {
    p: 4,
 };
 
-export default function BasicModal({ open, handleClose, course }) {
-   const [from, setFrom] = useState({});
+export default function BasicModal({ open, handleClose, course, update }) {
+   const [from, setFrom] = useState({
+      name: "",
+      course: "",
+   });
+
+   React.useEffect(() => {
+      if (update) {
+         setFrom({
+            name: update.name || "",
+            course: update.course || "",
+         });
+      }
+   }, [update]);
 
    const handleChange = (event) => {
       const { name, value } = event.target;
@@ -34,8 +46,15 @@ export default function BasicModal({ open, handleClose, course }) {
 
    const handleSubmit = async () => {
       try {
-         const res = await axios.post("http://localhost:3000/teacher", from);
-         handleClose();
+         if (update?.id) {
+            await axios.put(`http://localhost:3000/teacher/${update.id}`, from);
+            handleClose();
+            window.location.reload();
+         } else {
+            await axios.post("http://localhost:3000/teacher", from);
+            handleClose();
+            window.location.reload();
+         }
       } catch (error) {
          console.log(error);
       }
@@ -57,6 +76,7 @@ export default function BasicModal({ open, handleClose, course }) {
                      id="demo-simple-select"
                      name="course"
                      label="Course"
+                     value={from?.course}
                      onChange={handleChange}
                   >
                      {course?.map((item, index) => {
@@ -72,6 +92,7 @@ export default function BasicModal({ open, handleClose, course }) {
                      label="Teacher Name"
                      id="fullWidth"
                      name="name"
+                     value={from.name}
                      onChange={handleChange}
                   />
                   <Button

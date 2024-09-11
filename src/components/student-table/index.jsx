@@ -12,23 +12,26 @@ import axios from "axios";
 import { StudentModal } from "@components";
 export default function BasicTable({ data }) {
    const [open, setOpen] = useState(false);
+   const [update, setUpdate] = useState({});
    const handleClose = () => {
       setOpen(false);
    };
-   const handleEdit = (id) => {
-      setOpen(true, id);
+   const Edit = (item) => {
+      setUpdate(item);
+      setOpen(true);
    };
 
-   const handleDelete = (id) => {
+   const Delete = (id) => {
       try {
          axios.delete(`http://localhost:3000/students/${id}`);
+         window.location.reload();
       } catch (error) {
          console.log(error);
       }
    };
    return (
       <TableContainer component={Paper}>
-         <StudentModal open={open} handleClose={handleClose} data={data} />
+         <StudentModal open={open} handleClose={handleClose} update={update} />
          <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
                <TableRow>
@@ -59,7 +62,7 @@ export default function BasicTable({ data }) {
                         <Button
                            variant="contained"
                            color="primary"
-                           onClick={() => handleEdit(row.id)}
+                           onClick={() => Edit(row)}
                         >
                            edit
                         </Button>
@@ -67,7 +70,7 @@ export default function BasicTable({ data }) {
                            variant="contained"
                            color="error"
                            className="w-[80px]"
-                           onClick={() => handleDelete(row.id)}
+                           onClick={() => Delete(row.id)}
                         >
                            Delete
                         </Button>

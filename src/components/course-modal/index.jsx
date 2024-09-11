@@ -2,8 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
+   duration,
    FormControl,
    InputLabel,
    MenuItem,
@@ -24,8 +25,22 @@ const style = {
    p: 4,
 };
 
-export default function BasicModal({ open, handleClose }) {
-   const [from, setFrom] = useState({});
+export default function BasicModal({ open, handleClose, update }) {
+   const [from, setFrom] = useState({
+      name: "",
+      duration: "",
+      price: "",
+   });
+
+   useEffect(() => {
+      if (update) {
+         setFrom({
+            name: update.name || "",
+            duration: update.duration || "",
+            price: update.price || "",
+         });
+      }
+   }, [update]);
 
    const handleChange = (event) => {
       const { name, value } = event.target;
@@ -34,8 +49,13 @@ export default function BasicModal({ open, handleClose }) {
 
    const handleSubmit = async () => {
       try {
-         const res = await axios.post("http://localhost:3000/courses", from);
-         handleClose();
+         if (update?.id) {
+            await axios.put(`http://localhost:3000/courses/${update.id}`, from);
+            handleClose();
+         } else {
+            await axios.post("http://localhost:3000/courses", from);
+            handleClose();
+         }
       } catch (error) {
          console.log(error);
       }
@@ -56,6 +76,7 @@ export default function BasicModal({ open, handleClose }) {
                      label="Course Name"
                      id="fullWidth"
                      name="name"
+                     value={from.name}
                      onChange={handleChange}
                   />
                   <TextField
@@ -63,6 +84,7 @@ export default function BasicModal({ open, handleClose }) {
                      label="duration"
                      id="fullWidth"
                      name="duration"
+                     value={from.duration}
                      onChange={handleChange}
                   />
                   <TextField
@@ -70,6 +92,7 @@ export default function BasicModal({ open, handleClose }) {
                      label="price"
                      id="fullWidth"
                      name="price"
+                     value={from.price}
                      onChange={handleChange}
                   />
                   <Button

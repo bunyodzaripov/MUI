@@ -1,13 +1,40 @@
 {
   "students": [
     {
-      "id": "be1e",
+      "name": "edit bo'ldi",
+      "age": "121221",
+      "phone": "21122112",
+      "address": "2121221",
       "group": "Angular JS Standart N13",
+      "teacher": "user",
+      "id": "be1e"
+    },
+    {
+      "id": "a059",
+      "group": "NT-1",
       "name": "admin",
-      "phone": "21",
       "age": "12",
-      "address": "21",
-      "teacher": "user"
+      "phone": "1221",
+      "address": "12",
+      "teacher": "asdas"
+    },
+    {
+      "name": "asdasd",
+      "age": "1221",
+      "phone": "12212",
+      "address": "1212122222",
+      "group": "React JS Bootcamp N11",
+      "teacher": "admin",
+      "id": "570b"
+    },
+    {
+      "name": "admin edit bo'ldi",
+      "age": "333",
+      "phone": "9999999",
+      "address": "adresss",
+      "group": "Angular JS Standart N13",
+      "teacher": "user edit bo'ldi",
+      "id": "7506"
     }
   ],
   "teacher": [
@@ -22,56 +49,16 @@
       "name": "admin"
     },
     {
-      "id": "4026",
+      "name": "user edit bo'ldi",
       "course": "Frontend",
-      "name": "user"
-    },
-    {
-      "id": "db46",
-      "course": "Backend",
-      "name": "asdas"
-    },
-    {
-      "id": "de75",
-      "course": "Frontend",
-      "name": "admin"
-    },
-    {
-      "id": "3004",
-      "course": "Frontend",
-      "name": "aaaa"
-    },
-    {
-      "id": "d38b",
-      "course": "Backend",
-      "name": "adasddsa"
-    },
-    {
-      "id": "fe42",
-      "course": "smm",
-      "name": "Shavkat"
+      "id": "4026"
     }
   ],
   "groups": [
     {
-      "id": "11223",
-      "name": "React JS Bootcamp N11",
-      "course": "Frontend"
-    },
-    {
-      "id": "11224",
-      "name": "Angular JS Standart N13",
-      "course": "Backend"
-    },
-    {
-      "id": "3104",
-      "name": "asddasds",
-      "course": "Backend"
-    },
-    {
-      "id": "5975",
-      "course": "Backend",
-      "name": "asdsda"
+      "name": "React JS Bootcamp N1133",
+      "course": "Frontend",
+      "id": "11223"
     },
     {
       "id": "e131",
@@ -97,18 +84,6 @@
       "name": "tailwindcss",
       "duration": "8 montch",
       "price": "10000"
-    },
-    {
-      "id": "4247",
-      "name": "user",
-      "duration": "21",
-      "price": "10000"
-    },
-    {
-      "id": "61d3",
-      "name": "smm",
-      "duration": "4 oy",
-      "price": "100$"
     }
   ]
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
    FormControl,
    InputLabel,
@@ -29,10 +29,29 @@ export default function BasicModal({
    handleClose,
    group,
    teacher,
-   data,
+   update,
 }) {
-   const [from, setFrom] = useState({});
-   console.log(29, data);
+   const [from, setFrom] = useState({
+      name: "",
+      age: "",
+      phone: "",
+      address: "",
+      group: "",
+      teacher: "",
+   });
+
+   useEffect(() => {
+      if (update) {
+         setFrom({
+            name: update.name || "",
+            age: update.age || "",
+            phone: update.phone || "",
+            address: update.address || "",
+            group: update.group || "",
+            teacher: update.teacher || "",
+         });
+      }
+   }, [update]);
 
    const handleChange = (event) => {
       const { name, value } = event.target;
@@ -41,7 +60,16 @@ export default function BasicModal({
 
    const handleSubmit = async () => {
       try {
-         const res = await axios.post("http://localhost:3000/students", from);
+         if (update?.id) {
+            await axios.put(
+               `http://localhost:3000/students/${update.id}`,
+               from
+            );
+            window.location.reload();
+         } else {
+            await axios.post("http://localhost:3000/students", from);
+            window.location.reload();
+         }
          handleClose();
       } catch (error) {
          console.log(error);
@@ -49,89 +77,79 @@ export default function BasicModal({
    };
 
    return (
-      <div>
-         <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-         >
-            <Box sx={style}>
-               <FormControl fullWidth className="flex flex-col gap-3">
-                  <InputLabel id="demo-simple-select-label">Groups</InputLabel>
-                  <Select
-                     labelId="demo-simple-select-label"
-                     id="demo-simple-select"
-                     name="group"
-                     label="group"
-                     onChange={handleChange}
-                  >
-                     {group?.map((item, index) => {
-                        return (
-                           <MenuItem key={index} value={item?.name}>
-                              {item?.name}
-                           </MenuItem>
-                        );
-                     })}
-                  </Select>
-                  <TextField
-                     fullWidth
-                     label="name"
-                     id="fullWidth"
-                     name="name"
-                     onChange={handleChange}
-                  />
-                  <TextField
-                     fullWidth
-                     type="number"
-                     label="Age"
-                     id="fullWidth"
-                     name="age"
-                     onChange={handleChange}
-                  />
-                  <TextField
-                     fullWidth
-                     type="number"
-                     label="Phone Number"
-                     id="fullWidth"
-                     name="phone"
-                     onChange={handleChange}
-                  />
-                  <TextField
-                     fullWidth
-                     label="Address"
-                     id="fullWidth"
-                     name="address"
-                     onChange={handleChange}
-                  />
-                  <InputLabel id="teacher" className="mt-[22.5rem]">
-                     teacher
-                  </InputLabel>
-                  <Select
-                     labelId="teacher"
-                     id="teacher"
-                     name="teacher"
-                     label="teacher"
-                     onChange={handleChange}
-                  >
-                     {teacher?.map((item, index) => {
-                        return (
-                           <MenuItem key={index} value={item?.name}>
-                              {item?.name}
-                           </MenuItem>
-                        );
-                     })}
-                  </Select>
-                  <Button
-                     variant="contained"
-                     color="primary"
-                     onClick={handleSubmit}
-                  >
-                     Save
-                  </Button>
-               </FormControl>
-            </Box>
-         </Modal>
-      </div>
+      <Modal open={open} onClose={handleClose}>
+         <Box sx={style}>
+            <FormControl fullWidth className="flex flex-col gap-3">
+               <InputLabel id="group-select-label">Groups</InputLabel>
+               <Select
+                  labelId="group-select-label"
+                  id="group-select"
+                  name="group"
+                  label="Group"
+                  value={from.group}
+                  onChange={handleChange}
+               >
+                  {group?.map((item, index) => (
+                     <MenuItem key={index} value={item?.name}>
+                        {item?.name}
+                     </MenuItem>
+                  ))}
+               </Select>
+
+               <TextField
+                  label="Name"
+                  name="name"
+                  value={from.name}
+                  onChange={handleChange}
+               />
+               <TextField
+                  label="Age"
+                  name="age"
+                  type="number"
+                  value={from.age}
+                  onChange={handleChange}
+               />
+               <TextField
+                  label="Phone Number"
+                  name="phone"
+                  type="number"
+                  value={from.phone}
+                  onChange={handleChange}
+               />
+               <TextField
+                  label="Address"
+                  name="address"
+                  value={from.address}
+                  onChange={handleChange}
+               />
+
+               <InputLabel id="teacher-select-label" className="mt-[359px]">
+                  Teacher
+               </InputLabel>
+               <Select
+                  labelId="teacher-select-label"
+                  id="teacher-select"
+                  name="teacher"
+                  label="Teacher"
+                  value={from.teacher}
+                  onChange={handleChange}
+               >
+                  {teacher?.map((item, index) => (
+                     <MenuItem key={index} value={item?.name}>
+                        {item?.name}
+                     </MenuItem>
+                  ))}
+               </Select>
+
+               <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+               >
+                  Save
+               </Button>
+            </FormControl>
+         </Box>
+      </Modal>
    );
 }
