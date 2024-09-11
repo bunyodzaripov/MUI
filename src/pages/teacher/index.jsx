@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Modal from "@components/modal";
-import TeacherTable from "@components/teacher-table";
+import { TeacherModal, TeacherTable } from "@components";
 import { Button } from "@mui/material";
 const index = () => {
    const [open, setOpen] = useState(false);
@@ -24,7 +23,7 @@ const index = () => {
    };
    return (
       <div>
-         <Modal open={open} handleClose={handleClose} course={course} />
+         <TeacherModal open={open} handleClose={handleClose} course={course} />
          <Button
             variant="contained"
             color="success"

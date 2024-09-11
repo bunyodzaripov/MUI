@@ -8,6 +8,46 @@
       "address": "New York",
       "group": "React JS Bootcamp N11",
       "teacher": "John Doe"
+    },
+    {
+      "id": "0708",
+      "group": "React JS Bootcamp N11",
+      "name": "1212",
+      "age": "2121",
+      "phone": "12",
+      "address": "12"
+    },
+    {
+      "id": "b4ff",
+      "group": "React JS Bootcamp N11",
+      "name": "12",
+      "age": "21",
+      "phone": "21",
+      "address": "21"
+    },
+    {
+      "id": "cc4b",
+      "group": "React JS Bootcamp N11",
+      "name": "12",
+      "age": "21",
+      "phone": "21",
+      "address": "12"
+    },
+    {
+      "id": "118e",
+      "group": "NT-1",
+      "name": "Bunyod",
+      "age": "22",
+      "phone": "1929291",
+      "address": "chilonzor"
+    },
+    {
+      "id": "e7e9",
+      "group": "React JS Bootcamp N11",
+      "teacher": "user",
+      "age": "12",
+      "phone": "21",
+      "address": "21"
     }
   ],
   "teacher": [
@@ -17,40 +57,66 @@
       "course": "Frontend"
     },
     {
-      "id": "2e4e"
+      "id": "ac69",
+      "course": "Frontend",
+      "name": "admin"
     },
     {
-      "id": "6c63"
+      "id": "4026",
+      "course": "Frontend",
+      "name": "user"
     },
     {
-      "id": "8395"
+      "id": "db46",
+      "course": "Backend",
+      "name": "asdas"
     },
     {
-      "id": "b013"
+      "id": "de75",
+      "course": "Frontend",
+      "name": "admin"
     },
     {
-      "id": "96ee"
+      "id": "3004",
+      "course": "Frontend",
+      "name": "aaaa"
     },
     {
-      "id": "53a1"
+      "id": "d38b",
+      "course": "Backend",
+      "name": "adasddsa"
     },
     {
-      "id": "00e1"
-    },
-    {
-      "id": "ca81"
-    },
-    {
-      "id": "df79"
-    },
-    {
-      "id": "aa8c"
+      "id": "fe42",
+      "course": "smm",
+      "name": "Shavkat"
     }
   ],
   "groups": [
     {
       "id": "11223",
-      "name": "React JS Bootcamp N11"
+      "name": "React JS Bootcamp N11",
+      "course": "Frontend"
+    },
+    {
+      "id": "11224",
+      "name": "Angular JS Standart N13",
+      "course": "Backend"
+    },
+    {
+      "id": "3104",
+      "name": "asddasds",
+      "course": "Backend"
+    },
+    {
+      "id": "5975",
+      "course": "Backend",
+      "name": "asdsda"
+    },
+    {
+      "id": "e131",
+      "course": "smm",
+      "name": "NT-1"
     }
   ],
   "courses": [
@@ -59,6 +125,30 @@
       "name": "Frontend",
       "duration": "8 months",
       "price": "$1000"
+    },
+    {
+      "id": "1235",
+      "name": "Backend",
+      "duration": "10 months",
+      "price": "$2000"
+    },
+    {
+      "id": "8269",
+      "name": "tailwindcss",
+      "duration": "8 montch",
+      "price": "10000"
+    },
+    {
+      "id": "4247",
+      "name": "user",
+      "duration": "21",
+      "price": "10000"
+    },
+    {
+      "id": "61d3",
+      "name": "smm",
+      "duration": "4 oy",
+      "price": "100$"
     }
   ]
 }

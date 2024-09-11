@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import {
@@ -27,19 +26,21 @@ const style = {
 
 export default function BasicModal({ open, handleClose, course }) {
    const [from, setFrom] = useState({});
+
    const handleChange = (event) => {
-      const [name, value] = event.target;
+      const { name, value } = event.target;
       setFrom({ ...from, [name]: value });
    };
 
    const handleSubmit = async () => {
       try {
-         const res = await axios.post("http://localhost:3000/teacher", from);
-         console.log(res);
+         const res = await axios.post("http://localhost:3000/groups", from);
+         handleClose();
       } catch (error) {
          console.log(error);
       }
    };
+
    return (
       <div>
          <Modal
@@ -50,12 +51,12 @@ export default function BasicModal({ open, handleClose, course }) {
          >
             <Box sx={style}>
                <FormControl fullWidth className="flex flex-col gap-3">
-                  <InputLabel id="demo-simple-select-label">course</InputLabel>
+                  <InputLabel id="demo-simple-select-label">Course</InputLabel>
                   <Select
                      labelId="demo-simple-select-label"
                      id="demo-simple-select"
                      name="course"
-                     label="course"
+                     label="Course"
                      onChange={handleChange}
                   >
                      {course?.map((item, index) => {
@@ -68,16 +69,17 @@ export default function BasicModal({ open, handleClose, course }) {
                   </Select>
                   <TextField
                      fullWidth
-                     label="Teacher Name"
+                     label="Group Name"
                      id="fullWidth"
-                     onChange={() => handleChange(event)}
+                     name="name"
+                     onChange={handleChange}
                   />
                   <Button
                      variant="contained"
                      color="primary"
                      onClick={handleSubmit}
                   >
-                     save
+                     Save
                   </Button>
                </FormControl>
             </Box>
