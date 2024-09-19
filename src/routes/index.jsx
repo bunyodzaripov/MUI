@@ -15,6 +15,7 @@ import {
    Result,
    Course,
    AdminGroup,
+   SignUp,
 } from "@pages";
 
 const Index = () => {
@@ -22,6 +23,7 @@ const Index = () => {
       createRoutesFromElements(
          <Route path="/" element={<App />}>
             <Route index element={<SignIn />} />
+            <Route path="sign-up" element={<SignUp />} />
             <Route path="admin-layout" element={<AdminLayout />}>
                <Route index element={<Teacher />} />
                <Route path="student" element={<Student />} />

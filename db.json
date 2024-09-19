@@ -39,19 +39,9 @@
   ],
   "teacher": [
     {
-      "id": "133",
-      "name": "John Doe",
-      "course": "Frontend"
-    },
-    {
       "id": "ac69",
       "course": "Frontend",
       "name": "admin"
-    },
-    {
-      "name": "user edit bo'ldi",
-      "course": "Frontend",
-      "id": "4026"
     }
   ],
   "groups": [

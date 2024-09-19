@@ -2,6 +2,9 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { teacherValidationSchema } from "@utilis/validations";
+
 import { useState } from "react";
 import {
    FormControl,
@@ -25,33 +28,22 @@ const style = {
 };
 
 export default function BasicModal({ open, handleClose, course, update }) {
-   const [from, setFrom] = useState({
-      name: "",
-      course: "",
-   });
-
-   React.useEffect(() => {
-      if (update) {
-         setFrom({
-            name: update.name || "",
-            course: update.course || "",
-         });
-      }
-   }, [update]);
-
-   const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFrom({ ...from, [name]: value });
+   const initialValues = {
+      name: update?.name || "",
+      course: update?.course || "",
    };
 
-   const handleSubmit = async () => {
+   const handleSumbit = async (value) => {
       try {
          if (update?.id) {
-            await axios.put(`http://localhost:3000/teacher/${update.id}`, from);
+            await axios.put(
+               `http://localhost:3000/teacher/${update.id}`,
+               value
+            );
             handleClose();
             window.location.reload();
          } else {
-            await axios.post("http://localhost:3000/teacher", from);
+            await axios.post("http://localhost:3000/teacher", value);
             handleClose();
             window.location.reload();
          }
@@ -69,40 +61,56 @@ export default function BasicModal({ open, handleClose, course, update }) {
             aria-describedby="modal-modal-description"
          >
             <Box sx={style}>
-               <FormControl fullWidth className="flex flex-col gap-3">
-                  <InputLabel id="demo-simple-select-label">Course</InputLabel>
-                  <Select
-                     labelId="demo-simple-select-label"
-                     id="demo-simple-select"
-                     name="course"
-                     label="Course"
-                     value={from?.course}
-                     onChange={handleChange}
-                  >
-                     {course?.map((item, index) => {
-                        return (
-                           <MenuItem key={index} value={item?.name}>
-                              {item?.name}
-                           </MenuItem>
-                        );
-                     })}
-                  </Select>
-                  <TextField
-                     fullWidth
-                     label="Teacher Name"
-                     id="fullWidth"
-                     name="name"
-                     value={from.name}
-                     onChange={handleChange}
-                  />
-                  <Button
-                     variant="contained"
-                     color="primary"
-                     onClick={handleSubmit}
-                  >
-                     Save
-                  </Button>
-               </FormControl>
+               <Formik
+                  onSubmit={handleSumbit}
+                  initialValues={initialValues}
+                  validationSchema={teacherValidationSchema}
+                  enableReinitialize
+               >
+                  <Form>
+                     <FormControl fullWidth sx={{ mt: 2 }}>
+                        <InputLabel id="demo-simple-select-label">
+                           Course
+                        </InputLabel>
+                        <Field
+                           labelId="demo-simple-select-label"
+                           type="text"
+                           name="course"
+                           label="Course"
+                           as={Select}
+                           fullWidth
+                        >
+                           {course?.map((item, index) => {
+                              return (
+                                 <MenuItem key={index} value={item?.name}>
+                                    {item?.name}
+                                 </MenuItem>
+                              );
+                           })}
+                        </Field>
+                        <ErrorMessage
+                           name="course"
+                           component="p"
+                           className="text-red-500"
+                        />
+                        <Field
+                           type="text"
+                           name="teacher"
+                           fullWidth
+                           label="Teacher Name"
+                           as={TextField}
+                        />
+                        <ErrorMessage
+                           name="teacher"
+                           component="p"
+                           className="text-red-500"
+                        />
+                        <Button variant="contained" fullWidth type="submit">
+                           save
+                        </Button>
+                     </FormControl>
+                  </Form>
+               </Formik>
             </Box>
          </Modal>
       </div>

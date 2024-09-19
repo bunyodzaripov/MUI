@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-const Notification = (props) => {
+export const Notification = (props) => {
    const { title, type } = props;
    return toast(title, {
       position: "top-right",
@@ -13,5 +13,3 @@ const Notification = (props) => {
       type: type,
    });
 };
-
-export default Notification;
