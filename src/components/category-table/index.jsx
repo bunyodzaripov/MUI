@@ -20,17 +20,8 @@ export default function BasicTable({ categories }) {
       setOpen(true);
       setUpdate(item);
    };
-   const deleteCategory = (id) => {
-      return () => {
-         category
-            .delete(id)
-            .then((response) => {
-               window.location.reload();
-            })
-            .catch((error) => {
-               console.error("Error deleting category:", error);
-            });
-      };
+   const deleteCategory = (id) => () => {
+      category.delete(id).then(() => window.location.reload());
    };
    return (
       <TableContainer component={Paper}>
