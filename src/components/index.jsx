@@ -7,6 +7,8 @@ import GroupTable from "./group-table";
 import GroupModal from "./group-modal";
 import CourseModal from "./course-modal";
 import CourseTable from "./course-table";
+import CategoryTable from "./category-table";
+import CategoryModal from "./category-modal";
 export {
    TeacherTable,
    TeacherModal,
@@ -17,4 +19,6 @@ export {
    GroupModal,
    CourseModal,
    CourseTable,
+   CategoryTable,
+   CategoryModal,
 };

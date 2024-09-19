@@ -8,6 +8,7 @@ import Result from "../pages/result";
 import Course from "../pages/course";
 import AdminGroup from "../pages/admin-group";
 import SignUp from "../pages/sign-up";
+import Category from "../pages/category";
 export {
    AdminLayout,
    SignIn,
@@ -19,4 +20,5 @@ export {
    Course,
    AdminGroup,
    SignUp,
+   Category,
 };

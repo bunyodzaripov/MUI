@@ -2,7 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { useState, useEffect } from "react";
 import {
    FormControl,
    InputLabel,
@@ -11,6 +10,8 @@ import {
    TextField,
 } from "@mui/material";
 import axios from "axios";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { groupValidationSchema } from "../../utilis/validations";
 
 const style = {
    position: "absolute",
@@ -25,32 +26,17 @@ const style = {
 };
 
 export default function BasicModal({ open, handleClose, course, update }) {
-   const [from, setFrom] = useState({
-      name: "",
-      course: "",
-   });
-
-   useEffect(() => {
-      if (update) {
-         setFrom({
-            name: update.name || "",
-            course: update.course || "",
-         });
-      }
-   }, [update]);
-
-   const handleChange = (event) => {
-      const { name, value } = event.target;
-      setFrom({ ...from, [name]: value });
+   const initialValues = {
+      name: update?.name || "",
+      course: update?.course || "",
    };
-
-   const handleSubmit = async () => {
+   const handleSumbit = async (value) => {
       try {
          if (update?.id) {
-            await axios.put(`http://localhost:3000/groups/${update.id}`, from);
+            await axios.put(`http://localhost:3000/groups/${update.id}`, value);
             handleClose();
          } else {
-            await axios.post("http://localhost:3000/groups", from);
+            await axios.post("http://localhost:3000/groups", value);
             handleClose();
          }
       } catch (error) {
@@ -66,40 +52,60 @@ export default function BasicModal({ open, handleClose, course, update }) {
             aria-describedby="modal-modal-description"
          >
             <Box sx={style}>
-               <FormControl fullWidth className="flex flex-col gap-3">
-                  <InputLabel id="demo-simple-select-label">Course</InputLabel>
-                  <Select
-                     labelId="demo-simple-select-label"
-                     id="demo-simple-select"
-                     name="course"
-                     label="Course"
-                     value={from?.course}
-                     onChange={handleChange}
-                  >
-                     {course?.map((item, index) => {
-                        return (
-                           <MenuItem key={index} value={item?.name}>
-                              {item?.name}
-                           </MenuItem>
-                        );
-                     })}
-                  </Select>
-                  <TextField
-                     fullWidth
-                     label="Group Name"
-                     id="fullWidth"
-                     name="name"
-                     value={from?.name}
-                     onChange={handleChange}
-                  />
-                  <Button
-                     variant="contained"
-                     color="primary"
-                     onClick={handleSubmit}
-                  >
-                     Save
-                  </Button>
-               </FormControl>
+               <Formik
+                  onSubmit={handleSumbit}
+                  initialValues={initialValues}
+                  validationSchema={groupValidationSchema}
+                  enableReinitialize
+               >
+                  <Form>
+                     <FormControl fullWidth className="flex flex-col gap-3">
+                        <InputLabel id="demo-simple-select-label">
+                           Course
+                        </InputLabel>
+                        <Field
+                           as={Select}
+                           labelId="demo-simple-select-label"
+                           id="demo-simple-select"
+                           name="course"
+                           label="Course"
+                           fullWidth
+                           margin="normal"
+                        >
+                           {course?.map((item) => (
+                              <MenuItem key={item.id} value={item.id}>
+                                 {item.name}
+                              </MenuItem>
+                           ))}
+                        </Field>
+                        <ErrorMessage
+                           name="course"
+                           component="p"
+                           className="text-red-500"
+                        />
+                        <Field
+                           type="text"
+                           name="name"
+                           as={TextField}
+                           fullWidth
+                           margin="normal"
+                           label="Group Name"
+                        />
+                        <ErrorMessage
+                           name="name"
+                           component="p"
+                           className="text-red-500"
+                        />
+                        <Button
+                           type="submit"
+                           variant="contained"
+                           color="primary"
+                        >
+                           Save
+                        </Button>
+                     </FormControl>
+                  </Form>
+               </Formik>
             </Box>
          </Modal>
       </div>

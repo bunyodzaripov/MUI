@@ -23,14 +23,38 @@ const teacherValidationSchema = Yup.object().shape({
    course: Yup.string().required("Course is required"),
    teacher: Yup.string().required("Teacher Name is required"),
 });
-
 // ========= Student Modal =========
-
+const studentValidationSchema = Yup.object().shape({
+   group: Yup.string().required("Group is required"),
+   name: Yup.string().required("Name is required"),
+   age: Yup.string().required("Age is required"),
+   phone: Yup.string().required("Phone is required"),
+   address: Yup.string().required("Address is required"),
+   teacher: Yup.string().required("Teacher is required"),
+});
 // ========= Group Modal =========
-
+const groupValidationSchema = Yup.object().shape({
+   course: Yup.string().required("Course is required"),
+   name: Yup.string().required("Name is required"),
+});
 // ========= Course Modal =========
+const courseValidationSchema = Yup.object().shape({
+   name: Yup.string().required("Name is required"),
+   duration: Yup.string().required("Duration is required"),
+   price: Yup.string().required("Price is required"),
+});
+
+// ========= Category Modal =========
+const categoryValidationSchema = Yup.object().shape({
+   name: Yup.string().required("Category is required"),
+});
+
 export {
    signInValidationSchema,
    teacherValidationSchema,
    signUpValidationSchema,
+   studentValidationSchema,
+   groupValidationSchema,
+   courseValidationSchema,
+   categoryValidationSchema,
 };

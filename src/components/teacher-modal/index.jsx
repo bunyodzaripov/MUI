@@ -5,7 +5,6 @@ import Modal from "@mui/material/Modal";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { teacherValidationSchema } from "@utilis/validations";
 
-import { useState } from "react";
 import {
    FormControl,
    InputLabel,
@@ -96,6 +95,7 @@ export default function BasicModal({ open, handleClose, course, update }) {
                         <Field
                            type="text"
                            name="teacher"
+                           margin="normal"
                            fullWidth
                            label="Teacher Name"
                            as={TextField}

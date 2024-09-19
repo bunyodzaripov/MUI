@@ -15,6 +15,10 @@ const admin = [
       content: "Course",
       path: "/admin-layout/course",
    },
+   {
+      content: "Category",
+      path: "/admin-layout/category",
+   },
 ];
 
 const student = [

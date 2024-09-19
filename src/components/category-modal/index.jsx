@@ -2,11 +2,10 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import { courseValidationSchema } from "@utilis/validations";
 import { FormControl, TextField } from "@mui/material";
-import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-
+import { categoryValidationSchema } from "@utilis/validations";
+import { category } from "@service";
 const style = {
    position: "absolute",
    top: "50%",
@@ -22,21 +21,20 @@ const style = {
 export default function BasicModal({ open, handleClose, update }) {
    const initialValues = {
       name: update?.name || "",
-      duration: update?.duration || "",
-      price: update?.price || "",
    };
 
    const handleSubmit = async (value) => {
+      console.log(update);
+
       try {
          if (update?.id) {
-            await axios.put(
-               `http://localhost:3000/courses/${update.id}`,
-               value
-            );
+            await category.update(update.id, { name: value.name });
             handleClose();
+            window.location.reload();
          } else {
-            await axios.post("http://localhost:3000/courses", value);
+            await category.create({ name: value.name });
             handleClose();
+            window.location.reload();
          }
       } catch (error) {
          console.log(error);
@@ -55,43 +53,20 @@ export default function BasicModal({ open, handleClose, update }) {
                <Formik
                   onSubmit={handleSubmit}
                   initialValues={initialValues}
-                  validationSchema={courseValidationSchema}
+                  validationSchema={categoryValidationSchema}
                   enableReinitialize
                >
                   <Form>
                      <FormControl fullWidth className="flex flex-col gap-3">
                         <Field
                            name="name"
-                           label="Name"
-                           as={TextField}
-                           fullWidth
-                           margin="normal"
-                        />
-                        <ErrorMessage
-                           name="name"
-                           component="p"
-                           className="text-red-500"
-                        />
-                        <Field
-                           name="duration"
-                           label="Duration"
-                           as={TextField}
-                           fullWidth
-                        />
-                        <ErrorMessage
-                           name="duration"
-                           component="p"
-                           className="text-red-500"
-                        />
-                        <Field
-                           name="price"
-                           label="Price"
+                           label="category"
                            as={TextField}
                            fullWidth
                         />
 
                         <ErrorMessage
-                           name="price"
+                           name="name"
                            component="p"
                            className="text-red-500"
                         />

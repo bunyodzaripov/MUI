@@ -26,15 +26,6 @@
       "group": "React JS Bootcamp N11",
       "teacher": "admin",
       "id": "570b"
-    },
-    {
-      "name": "admin edit bo'ldi",
-      "age": "333",
-      "phone": "9999999",
-      "address": "adresss",
-      "group": "Angular JS Standart N13",
-      "teacher": "user edit bo'ldi",
-      "id": "7506"
     }
   ],
   "teacher": [

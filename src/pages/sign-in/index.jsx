@@ -1,7 +1,6 @@
 import React from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
+import { NavLink, useNavigate } from "react-router-dom";
+import { TextField, Button, Box } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { signInValidationSchema } from "@utilis/validations";
@@ -21,14 +20,13 @@ const Index = () => {
          localStorage.setItem("access_token", access_token);
          if (response.status === 201) {
             navigate("/admin-layout");
-         } else {
-            Notification({
-               title: "Password or Name is wrong",
-               type: "error",
-            });
          }
       } catch (error) {
          console.log(error);
+         Notification({
+            title: "Password or Name is wrong",
+            type: "error",
+         });
       }
    };
 
@@ -92,6 +90,18 @@ const Index = () => {
                            />
                         </Form>
                      </Formik>
+                     <Box>
+                        <p className="text-center text-sm ">
+                           Don’t have an account?
+                        </p>
+                        <NavLink
+                           to="/sign-up"
+                           className="my-3.5 text-sm text-start"
+                           color="success"
+                        >
+                           Sign Up here
+                        </NavLink>
+                     </Box>
                      <Button
                         variant="contained"
                         fullWidth
